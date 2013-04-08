@@ -15,9 +15,10 @@ module ExtremeStartup
     
   class WebServer < Sinatra::Base
 
+    set :root, '/Users/trulsjor/dev/extreme_startup2/'
     set :port, 3000
     set :static, true 
-    set :public, 'public'
+    set :public_folder, 'public'
     set :players,    Hash.new
     set :players_threads, Hash.new
     set :scoreboard, Scoreboard.new(ENV['LENIENT'])
@@ -162,7 +163,13 @@ module ExtremeStartup
       end
       players_threads[player.uuid] = player_thread
 
-      haml :player_added, :locals => { :playerid => player.uuid }
+      redirect '/'
+      #haml :player_added, :locals => { :playerid => player.uuid }
+    #    haml :personal_page, :locals => { 
+     #     :name => player.name, 
+      #    :playerid => player.uuid, 
+       #   :score => scoreboard.scores[player.uuid], 
+        #  :log => player.log[0..25] }
     end
     
   private

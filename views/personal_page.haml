@@ -1,22 +1,24 @@
 %html
   %head
     %title Extreme Startup - #{name}
-    %link(rel="stylesheet" href="/css/style.css")
+    %link(rel="stylesheet" href="/css/bootstrap.css")
+    %link(rel="stylesheet" href="/css/main.css")
   %body
-    %h1 Hello, #{name}! 
-    
-    %h2 
-      Your score is: 
-      %span.score #{score}
-    
-    %a{ :href => "/withdraw/#{playerid}" }
-      Withdraw
-      
-    %h2 Log:
-    %ul
-      - log.each do |logline|
-        %li 
-          %div{:class => ["logline", "id", logline.result]} #{logline.id}
-          %div{:class => ["logline", "result", logline.result]} result: #{logline.result}
-          %div{:class => ["logline", "points", logline.result]} points awarded: #{logline.points}
-          
+    .container-narrow
+      .jumbotron
+        %h1 #{name} 
+        %h2 har  #{score} poeng
+        %table{:class => "table table-striped"}
+          - log.each do |logline|
+            %tr.player{:class => logline.status}
+              %td #{logline.id}
+              %td #{logline.result}
+              %td #{logline.points} poeng!
+     
+      .jumbotron
+        %a{ :href => "/withdraw/#{playerid}", :class =>"btn btn-large btn-danger"}
+          Jeg trekker meg :(
+
+      :javascript
+        refresh = function() { window.location.reload(); };
+        setTimeout(refresh, 10000);

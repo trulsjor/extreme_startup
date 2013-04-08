@@ -1,14 +1,17 @@
 %html
   %head
+    %title Extreme Startup - Oversikt
+    %link(rel="stylesheet" href="/css/bootstrap.css")
+    %link(rel="stylesheet" href="/css/signin.css")
+  %head
   %body
-    %h1 Add a new player
+   
   
-    %form{:action => "/players", :method => "post"}
-      %label{ :for => "name" }Name:
-      %input{ :type => "text", :id => "name", :name => "name" }
+    %form{:class=>"form-signin", :action => "/players", :method => "post"}
+      %h1 Ny deltager!
+      %input{ :class => "input-block-level", :placeholder=> "Navn", :type => "text", :id => "name", :name => "name" } 
+      %input{ :class => "input-block-level", :placeholder=> "URL", :type => "text", :id => "url", :name => "url" }        
+      %input{ :class =>"btn btn-large btn-primary", :type => "submit", :value => "Klar!"}
       
-      %label{ :for => "name" }URL:
-      %input{ :type => "text", :id => "url", :name => "url" }      
-      
-      %input{ :type => "submit", :value => "Submit"}
-      
+
+   

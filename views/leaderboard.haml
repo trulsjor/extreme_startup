@@ -1,18 +1,26 @@
 %html
   %head
-    %title Extreme Startup - Leaderboard
-    %link(rel="stylesheet" href="/css/style.css")
+    %title Extreme Startup - Oversikt
+    %link(rel="stylesheet" href="/css/bootstrap.css")
+    %link(rel="stylesheet" href="/css/main.css")
   %body
-    %a{ :href => '/players' }
-      I want to play!
-    %h1 Leaderboard 
-    %ul
-      - leaderboard.each do |entry|
-        %li.player
-          %div{:class => ["ranking", "name"]} #{html_escape(entry.playername)}
-          %div{:class => ["ranking", "points"]} #{entry.score}
-          
-    :javascript
-      refresh = function() { window.location.reload(); };
-      setTimeout(refresh, 10000);
+    .container-narrow
+      .jumbotron
+        %h1 MilesCamp 
+        %h2 Extreme Startup
+        %table{:class => "table table-striped"}
+          - leaderboard.each do |entry|
+            %tr.player
+              %td
+                %a{ :href => "/players/#{entry.playerid}" } #{html_escape(entry.playername)}
+              %td{:style=>'text-align: right'} #{entry.score} poeng
+     
+      .jumbotron
+        %a{ :href => '/players', :class =>"btn btn-large btn-success"}
+          Jeg vil være med!
 
+      :javascript
+        refresh = function() { window.location.reload(); };
+        setTimeout(refresh, 2000);
+
+   

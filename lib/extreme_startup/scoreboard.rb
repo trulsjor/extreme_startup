@@ -12,6 +12,7 @@ module ExtremeStartup
   
     def increment_score_for(player, question)
       increment = score(question, leaderboard_position(player))
+      status = status(question)
       @scores[player.uuid] += increment
       if (increment > 0)
         @correct_tally[player.uuid] += 1
@@ -19,7 +20,7 @@ module ExtremeStartup
         @incorrect_tally[player.uuid] += 1
       end
       puts "added #{increment} to player #{player.name}'s score. It is now #{@scores[player.uuid]}"
-      player.log_result(question.id, question.result, increment)
+      player.log_result(question.id, question.result, increment, status)
     end
     
     def record_request_for(player)
@@ -70,6 +71,16 @@ module ExtremeStartup
       end
     end
     
+
+    def status(question)
+      case question.result
+        when "correct"        then "success"
+        when "wrong"          then "warning"
+        when "error_response" then "error"
+        when "no_server_response"     then "error"
+      end
+    end
+
     def allow_passes(question, leaderboard_position)
       (question.answer == "") ? 0 : penalty(question, leaderboard_position)
     end
