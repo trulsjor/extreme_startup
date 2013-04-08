@@ -1,14 +1,49 @@
 %html
   %head
     %title Extreme Startup - Score Graph
-    %link(rel="stylesheet" href="/css/style.css")
-    %script{:type => "text/javascript", :src  => "/js/smoothie.js"}
-    %script{:type => "text/javascript", :src  => "/js/jquery-1.6.2.min.js"}
-    %script{:type => "text/javascript", :src  => "/js/leaderboard.js"}
+    %link(rel="stylesheet" href="/css/bootstrap.css")
+    %link(rel="stylesheet" href="/css/main.css")
+    
 
   %body
-    .left
-      %canvas{:id => "mycanvas", :width => 500, :height => 500 }
-    .right
-      %h1 Leader Board
-      %ul{:id => "scoreboard" }
+    %div{:class => "navbar navbar-inverse navbar-fixed-top"}
+      %div{:class=>"navbar-inner"}
+        %div{:class=>"container"}
+          %button{:type=>"button", :class => "btn btn-navbar", :data => "collapse", :data => ".nav-collapse"}
+            %span{:class=>"icon-bar"}
+            %span{:class=>"icon-bar"}
+            %span{:class=>"icon-bar"}       
+          %div{:class=>"nav-collapse collapse"}
+            %ul{:class=>"nav"}
+              %li
+                %a{ :href=>"/"}Oversikt
+              %li{:class =>"active"}
+                %a{ :href=>"/graph"}Graf  
+    
+
+  .container-narrow
+    .jumbotron
+      %h1 MilesCamp 
+      %h2 Extreme Startup
+      %a{ :href => '#myModal', :role=>"button", :class =>"btn btn-large btn-success", "data-toggle"=>"modal"} Jeg vil være med!
+
+    %table{:id => "scoreboard", :class => "table table-bordered"}
+    %div{:class=>"centercanvas"}
+      %canvas{:id => "mycanvas", :width => 800, :height => 300 }
+
+
+ 
+  %div{:id=>"myModal", :class => "modal hide fade", :tabindex => "1", :role => "dialog", "aria-labelledby" => "myModalLabel","aria-hidden"=>"true"}
+    %div{:class => "modal-header"}
+      %button{:type=>"button", :class=>"close", "data-dismiss"=>"modal", "aria-hidden"=>"true"}x
+      %h2{:id=>"myModalLabel"} Ny deltager!
+      %form{:class=>"form-signin", :action => "/players", :method => "post"}
+        %input{ :class => "input-block-level", :placeholder=> "Navn", :type => "text", :id => "name", :name => "name" } 
+        %input{ :class => "input-block-level", :placeholder=> "URL", :type => "text", :id => "url", :name => "url" }        
+        %input{ :class =>"btn btn-large btn-primary", :type => "submit", :value => "Klar!"}
+
+%script{:type => "text/javascript", :src  => "/js/smoothie.js"}
+%script{:type => "text/javascript", :src  => "/js/jquery-1.9.1.min.js"}
+%script{:type => "text/javascript", :src  => "/js/leaderboard.js"}
+%script{:type => "text/javascript", :src  => "/js/bootstrap.js"}
+    

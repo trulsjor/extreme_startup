@@ -3,8 +3,9 @@ $(document).ready(function() {
 
 	var Graph = function(canvas) {
 		var timeSeries = {};
-		var smoothie = new SmoothieChart({millisPerPixel: 500});
-		smoothie.streamTo(canvas, 1000); 
+		var smoothie = new SmoothieChart({millisPerPixel:200,grid:{fillStyle:'rgba(255,255,255,0.21)',strokeStyle:'#e5e5e5',sharpLines:false},labels:{disabled:true}});
+		//grid:{fillStyle:'rgba(255,255,255,0.21)'},labels:{disabled:true}});
+		smoothie.streamTo(canvas); 
 		var randomRgbValue = function () {
 			return Math.floor(Math.random() * 156 + 99);
 		}
@@ -31,15 +32,19 @@ $(document).ready(function() {
 
 	var ScoreBoard = function(div) {
 		this.updateWith = function (leaderboard) {
-			var list = $('<ul id="scoreboard"></ul>');            
+			var list = $('<table id="scoreboard" class="table table-bordered"></table>');            
 			for (var i=0; i < leaderboard.length; i += 1) {
 				var entry = leaderboard[i];
 				list.append(
-					$('<div/>').append(
-						$('<li/>', {class: "player"})
-						.append($('<div>' + entry.playername + '</div>').addClass("ranking name").css("background-color", colourTable[entry.playerid]))
-						.append($('<div>' + entry.score + '</div>').addClass("ranking points").css("background-color", colourTable[entry.playerid]))
-						.append($('<a>Withdraw</a>').attr("href", "/withdraw/" + entry.playerid))));
+					$('<tr/>')
+						.append($('<td><a class="btn btn-primary" href=/players/'+ entry.playerid +'><i class="icon-home icon-white"></i></a></td>')
+							.css("background-color", colourTable[entry.playerid])
+							.css("text-align", "center"))
+						.append($('<td>' + entry.playername + '</td>'))
+						.append($('<td>' + entry.score + ' poeng </td>')
+							.css("text-align", "right"))
+				);
+							
 				}
 				$("#scoreboard").replaceWith(list); 
 			}
