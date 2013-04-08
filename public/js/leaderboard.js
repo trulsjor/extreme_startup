@@ -4,7 +4,6 @@ $(document).ready(function() {
 	var Graph = function(canvas) {
 		var timeSeries = {};
 		var smoothie = new SmoothieChart({millisPerPixel:200,grid:{fillStyle:'rgba(255,255,255,0.21)',strokeStyle:'#e5e5e5',sharpLines:false},labels:{disabled:true}});
-		//grid:{fillStyle:'rgba(255,255,255,0.21)'},labels:{disabled:true}});
 		smoothie.streamTo(canvas); 
 		var randomRgbValue = function () {
 			return Math.floor(Math.random() * 156 + 99);
