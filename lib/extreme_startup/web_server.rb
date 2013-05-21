@@ -15,7 +15,7 @@ module ExtremeStartup
     
   class WebServer < Sinatra::Base
 
-    set :root, '/Users/trulsjor/dev/camp/extreme_startup/'
+    set :root, '/Users/trulsjor/dev/milescamp/extreme_startup/'
     set :port, 3000
     set :static, true 
     set :public_folder, 'public'
@@ -26,10 +26,13 @@ module ExtremeStartup
     set :game_state, GameState.new
 
     get '/' do 
-     # haml :leaderboard, :locals => { 
-     #      :leaderboard => LeaderBoard.new(scoreboard, players, game_state), 
-     #     :players => players  }
        haml :scores
+    end
+
+    get '/nograph'do
+      haml :leaderboard, :locals => { 
+           :leaderboard => LeaderBoard.new(scoreboard, players, game_state), 
+           :players => players  }
     end
 
     get '/scores' do 
@@ -126,7 +129,7 @@ module ExtremeStartup
           :name => players[uuid].name, 
           :playerid => uuid, 
           :score => scoreboard.scores[uuid], 
-          :log => players[uuid].log[0..25] }
+          :log => players[uuid].log[0..100] } #was 25
       end
     end
 

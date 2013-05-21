@@ -4,6 +4,25 @@
     %link(rel="stylesheet" href="/css/bootstrap.css")
     %link(rel="stylesheet" href="/css/main.css")
   %body
+    %div{:class => "navbar navbar-inverse navbar-fixed-top"}
+      %div{:class=>"navbar-inner"}
+        %div{:class=>"container"}
+          %button{:type=>"button", :class => "btn btn-navbar", :data => "collapse", :data => ".nav-collapse"}
+            %span{:class=>"icon-bar"}
+            %span{:class=>"icon-bar"}
+            %span{:class=>"icon-bar"}       
+          %div{:class=>"nav-collapse collapse"}
+            %ul{:class=>"nav"}
+              %li
+                %a{ :href=>"/graph"}Oversikt  
+              %li
+                %a{ :href=>"/nograph"}Uten graf og bling
+            %ul{:class=>"nav pull-right"}  
+              %li
+                %a{:href=>"/samples.zip"}
+                  %i{:class=>"icon-download-alt icon-white"}
+                  Startkit
+                  
     .container-narrow
       .jumbotron
         %h1 #{name} 
@@ -12,6 +31,7 @@
           - log.each do |logline|
             %tr.player{:class => logline.status}
               %td #{logline.id}
+              %td #{logline.text}
               %td #{logline.result}
               %td #{logline.points} poeng!
      

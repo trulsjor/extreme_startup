@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'set'
 require 'prime'
 
@@ -132,7 +133,7 @@ module ExtremeStartup
 
   class MaximumQuestion < SelectFromListOfNumbersQuestion
     def as_text
-      "which of the following numbers is the largest: " + @numbers.join(', ')
+      "Hvilket av de folgende tallene er storst: " + @numbers.join(', ')
     end
     def points
       40
@@ -149,7 +150,7 @@ module ExtremeStartup
 
   class AdditionQuestion < BinaryMathsQuestion
     def as_text
-      "what is #{@n1} plus #{@n2}"
+      "hva er #{@n1} pluss #{@n2}"
     end
   private
     def correct_answer
@@ -159,7 +160,7 @@ module ExtremeStartup
 
   class SubtractionQuestion < BinaryMathsQuestion
     def as_text
-      "what is #{@n1} minus #{@n2}"
+      "hva er #{@n1} minus #{@n2}"
     end
   private
     def correct_answer
@@ -169,7 +170,7 @@ module ExtremeStartup
 
   class MultiplicationQuestion < BinaryMathsQuestion
     def as_text
-      "what is #{@n1} multiplied by #{@n2}"
+      "hva er #{@n1} multiplisert med #{@n2}"
     end
   private
     def correct_answer
@@ -179,7 +180,7 @@ module ExtremeStartup
 
   class AdditionAdditionQuestion < TernaryMathsQuestion
     def as_text
-      "what is #{@n1} plus #{@n2} plus #{@n3}"
+      "Hva er #{@n1} pluss #{@n2} pluss #{@n3}"
     end
     def points
       30
@@ -192,7 +193,7 @@ module ExtremeStartup
 
   class AdditionMultiplicationQuestion < TernaryMathsQuestion
     def as_text
-      "what is #{@n1} plus #{@n2} multiplied by #{@n3}"
+      "Hva er #{@n1} pluss #{@n2} multiplisert med #{@n3}"
     end
     def points
       60
@@ -205,7 +206,7 @@ module ExtremeStartup
 
   class MultiplicationAdditionQuestion < TernaryMathsQuestion
     def as_text
-      "what is #{@n1} multiplied by #{@n2} plus #{@n3}"
+      "Hva er #{@n1} multiplisert med #{@n2} pluss #{@n3}"
     end
     def points
       50
@@ -218,7 +219,7 @@ module ExtremeStartup
 
   class PowerQuestion < BinaryMathsQuestion
     def as_text
-      "what is #{@n1} to the power of #{@n2}"
+      "Hva er #{@n1} opphoyd i #{@n2}"
     end
     def points
       20
@@ -231,7 +232,7 @@ module ExtremeStartup
 
   class SquareCubeQuestion < SelectFromListOfNumbersQuestion
     def as_text
-      "which of the following numbers is both a square and a cube: " + @numbers.join(', ')
+      "Hvilke av de folgende tallene har et heltall både som kvadratrot og kubikkrot: " + @numbers.join(', ')
     end
     def points
       60
@@ -264,7 +265,7 @@ module ExtremeStartup
 
   class PrimesQuestion < SelectFromListOfNumbersQuestion
      def as_text
-       "which of the following numbers are primes: " + @numbers.join(', ')
+       "Hvilke av de folgende tallene er primtall: " + @numbers.join(', ')
      end
      def points
        60
@@ -282,13 +283,7 @@ module ExtremeStartup
   class FibonacciQuestion < BinaryMathsQuestion
     def as_text
       n = @n1 + 4
-      if (n > 20 && n % 10 == 1)
-        return "what is the #{n}st number in the Fibonacci sequence"
-      end
-      if (n > 20 && n % 10 == 2)
-        return "what is the #{n}nd number in the Fibonacci sequence"
-      end
-      return "what is the #{n}th number in the Fibonacci sequence"  
+      return "Hvilket tall er nummer #{n} i Fibonaccirekken"  
     end
     def points
       50
@@ -306,11 +301,15 @@ module ExtremeStartup
     class << self
       def question_bank
         [
-          ["who is the Prime Minister of Great Britain", "David Cameron"],
-          ["which city is the Eiffel tower in", "Paris"],
-          ["what currency did Spain use before the Euro", "peseta"],
-          ["what colour is a banana", "yellow"],
-          ["who played James Bond in the film Dr No", "Sean Connery"]
+          ["Ikke Miles2.0, men..?", "Miles Ahead"],
+          ["Hvor mange ansatte (inkludert signerte) er det totalt i Miles pr i dag", "86"],
+          ["Hva er slagordet til Miles?", "Faglig autoritet og varme - et unikt IT-selskap"],
+          ["Hvem har æren for logoen til Miles?", "Ivan"],
+          ["Hva heter hotellet vi er på?", "Holmenkollen Park Hotel Rica"],
+          ["I hvilket år ble Miles startet?","2005"],
+          ["I hvilken by ble det første Mileskontoret åpnet?", "Bergen"],
+          ["Hva er organisasjonsnummeret til Miles Stavanger AS?", "896892592"],
+          ["Hva er epostadressen til Miles Oslo?","oslo@miles.no"]
         ]
       end
     end
@@ -334,7 +333,7 @@ module ExtremeStartup
   class AnagramQuestion < Question
     def as_text
       possible_words = [@anagram["correct"]] + @anagram["incorrect"]
-      %Q{which of the following is an anagram of "#{@anagram["anagram"]}": #{possible_words.shuffle.join(", ")}}
+      %Q{Hvilket av de folgende ordene er et anagram av "#{@anagram["anagram"]}": #{possible_words.shuffle.join(", ")}}
     end
 
     def initialize(player, *words)
@@ -347,10 +346,73 @@ module ExtremeStartup
       end
     end
 
+    def points
+      80
+    end
+
     def correct_answer
       @anagram["correct"]
     end
   end
+
+class PalindromeQuestion < Question
+    def initialize(player, *words)
+      if words.any?
+        @sample = words
+        @palindromes = @sample.select { |w| w.reverse==w }
+      else
+        all_words = YAML.load_file(File.join(File.dirname(__FILE__), "palindromes.yaml"))
+        @non_palindromes = all_words["incorrect"].sample(rand(3..6))
+        @palindromes = all_words["correct"].sample(rand(3..6))
+        @sample= (@non_palindromes+@palindromes).shuffle
+      end
+    end
+
+    def points
+      35
+    end
+
+    def as_text
+      %Q{Hvilke ord er et palindrom?: #{@sample.join(", ")}}
+    end
+
+    def correct_answer
+      @sample.select{|p|@palindromes.include?(p)}.join(", ")
+    end
+  end
+
+
+  class ClockAngleQuestion<Question
+
+    def initialize(player, *time)
+      if time.any?
+        @hr, @min= time.first.split(":")
+        @hr = @hr.to_i
+        @min = @min.to_i
+      else
+        @hr = rand(0..23)
+        @min = rand(0..59)
+      end
+    end
+
+    def points
+      200
+    end
+
+    def as_text
+      "Hva er den minste vinkelen mellom timeviseren og minuttviseren ved #{'%02d' % @hr}:#{'%02d' % @min}"
+    end
+
+    def correct_answer
+      @hr12= @hr % 12
+      hr_angle=0.5*((60*@hr12)+@min)
+      min_angle=6*@min
+      angle=(min_angle - hr_angle).abs
+      (angle>180) ? (360-angle).round : angle.round
+    end
+
+  end
+
 
   class ScrabbleQuestion < Question
     def as_text
@@ -392,26 +454,36 @@ module ExtremeStartup
     def initialize
       @round = 1
       @question_types = [
-        AdditionQuestion,
-        MaximumQuestion,
-        MultiplicationQuestion,
-        SquareCubeQuestion,
-        GeneralKnowledgeQuestion,
-        PrimesQuestion,
-        SubtractionQuestion,
-        FibonacciQuestion,
-        PowerQuestion,
-        AdditionAdditionQuestion,
-        AdditionMultiplicationQuestion,
-        MultiplicationAdditionQuestion,
-        AnagramQuestion,
-        ScrabbleQuestion
+       # GeneralKnowledgeQuestion,             #00  1
+        AdditionQuestion,                     #01  1
+        AdditionQuestion,                     #01  1
+        MaximumQuestion,                      #02  1
+        MultiplicationQuestion,               #03  2
+        PrimesQuestion,                       #04  2 
+        SquareCubeQuestion,                   #05  2 
+        PalindromeQuestion,                   #06  3
+        SubtractionQuestion,                  #07  3
+        FibonacciQuestion,                    #08  3
+        PowerQuestion,                        #09  4
+        AdditionAdditionQuestion,             #10  4
+        AdditionMultiplicationQuestion,       #11  4
+        MultiplicationAdditionQuestion,       #12  5
+        AnagramQuestion,                      #13  5
+        ClockAngleQuestion                    #14  5
       ]
     end
 
     def next_question(player)
-      window_end = (@round * 2 - 1)
-      window_start = [0, window_end - 4].max
+      window_end = (@round * 3 - 1)
+      #window_start = [0, window_end - 4].max
+      # 1 -  - 2
+      # 2 -  - 5
+      # 3 -  - 8
+      # 4 -  - 11
+      # 5 -  - 14
+
+      window_start = 0 
+      #window_end = 14
       available_question_types = @question_types[window_start..window_end]
       available_question_types.sample.new(player)
     end
@@ -432,7 +504,7 @@ module ExtremeStartup
     end
 
     def as_text
-      "what is your name"
+      "Hva heter du?"
     end
   end
 

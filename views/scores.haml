@@ -15,15 +15,20 @@
             %span{:class=>"icon-bar"}       
           %div{:class=>"nav-collapse collapse"}
             %ul{:class=>"nav"}
-              %li
-                %a{ :href=>"/"}Oversikt
               %li{:class =>"active"}
-                %a{ :href=>"/graph"}Graf  
-    
+                %a{ :href=>"/graph"}Oversikt  
+              %li
+                %a{ :href=>"/nograph"}Uten graf og bling
+            %ul{:class=>"nav pull-right"}  
+              %li
+                %a{:href=>"/samples.zip"}
+                  %i{:class=>"icon-download-alt icon-white"}
+                  Startkit
 
   .container-narrow
     .jumbotron
-      %h1 MilesCamp 
+
+      %img(src="/img/milescamp.png" width="500px") 
       %h2 Extreme Startup
       %a{ :href => '#myModal', :role=>"button", :class =>"btn btn-large btn-success", "data-toggle"=>"modal"} Jeg vil være med!
 

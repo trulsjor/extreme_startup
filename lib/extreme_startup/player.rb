@@ -3,16 +3,17 @@ require 'uuid'
 module ExtremeStartup
   
   class LogLine
-    attr_reader :id, :result, :points, :status
-    def initialize(id, result, points, status)
+    attr_reader :id, :result, :points, :status, :text
+    def initialize(id, result, points, status, text)
       @id = id
       @result = result
       @points = points
       @status = status
+      @text = text
     end
     
     def to_s
-      "#{@id}: #{@result} - points Awarded: #{@points} - status: #{@status}" 
+      "#{@id}: #{@result} - points Awarded: #{@points} - status: #{@status} - text: #{@text}" 
     end
   end
   
@@ -33,8 +34,8 @@ module ExtremeStartup
       @log = []
     end
 
-    def log_result(id, msg, points,status)
-      @log.unshift(LogLine.new(id, msg, points,status))
+    def log_result(id, msg, points,status,text)
+      @log.unshift(LogLine.new(id, msg, points,status,text))
     end
 
     def to_s

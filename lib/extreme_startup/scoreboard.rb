@@ -20,7 +20,7 @@ module ExtremeStartup
         @incorrect_tally[player.uuid] += 1
       end
       puts "added #{increment} to player #{player.name}'s score. It is now #{@scores[player.uuid]}"
-      player.log_result(question.id, question.result, increment, status)
+      player.log_result(question.id, question.result, increment, status, question.as_text)
     end
     
     def record_request_for(player)
@@ -88,6 +88,6 @@ module ExtremeStartup
     def penalty(question, leaderboard_position)
       -1 * question.points / leaderboard_position
     end
-     
+    
   end
 end

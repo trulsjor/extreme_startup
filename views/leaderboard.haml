@@ -14,27 +14,30 @@
             %span{:class=>"icon-bar"}       
           %div{:class=>"nav-collapse collapse"}
             %ul{:class=>"nav"}
-              %li{:class =>"active"}
-                %a{ :href=>"/"}Oversikt
               %li
-                %a{ :href=>"/graph"}Graf  
-              
+                %a{ :href=>"/graph"}Oversikt  
+              %li{:class =>"active"}
+                %a{ :href=>"/nograph"}Uten graf og bling
+            %ul{:class=>"nav pull-right"}  
+              %li
+                %a{:href=>"/samples.zip"}
+                  %i{:class=>"icon-download-alt icon-white"}
+                  Startkit
 
     .container-narrow
       .jumbotron
-        %h1 MilesCamp 
+        %img(src="/img/milescamp.png" width="500px") 
         %h2 Extreme Startup
+        %a{ :href => '/players', :class =>"btn btn-large btn-success"}
+          Jeg vil være med!
+        %p &nbsp;
         %table{:class => "table table-striped"}
           - leaderboard.each do |entry|
             %tr.player
               %td
                 %a{ :href => "/players/#{entry.playerid}" } #{html_escape(entry.playername)}
               %td{:style=>'text-align: right'} #{entry.score} poeng
-     
-      .jumbotron
-        %a{ :href => '/players', :class =>"btn btn-large btn-success"}
-          Jeg vil være med!
-
+  
       :javascript
         refresh = function() { window.location.reload(); };
         setTimeout(refresh, 2000);

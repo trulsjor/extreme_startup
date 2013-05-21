@@ -4,6 +4,7 @@ $(document).ready(function() {
 		$.post('/advance_round', function(data) {
 		  location.reload();
 		});
+		window.location.reload()
 	});
 
 	$('#pause').click(function(){
