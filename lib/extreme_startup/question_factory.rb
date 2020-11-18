@@ -454,7 +454,7 @@ class PalindromeQuestion < Question
     def initialize
       @round = 1
       @question_types = [
-       # GeneralKnowledgeQuestion,             #00  1
+        GeneralKnowledgeQuestion,             #00  1
         AdditionQuestion,                     #01  1
         AdditionQuestion,                     #01  1
         MaximumQuestion,                      #02  1
@@ -489,7 +489,14 @@ class PalindromeQuestion < Question
     end
 
     def advance_round
-      @round += 1
+       puts "Advance round #{$round}"
+      @round = [@round + 1, 14].min
+    end
+
+    def reduce_round
+        puts "Reduce round #{$round}"
+        @round = [@round - 1, 1].max
+
     end
 
   end

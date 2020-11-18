@@ -10,7 +10,9 @@
       .jumbotron
         %h1 Nåværende runde: #{round}
         %form
+          %input#reduce{:type => "button", :class=>"btn btn-primary", :value => "Forrige runde"}
           %input#advance{:type => "button", :class=>"btn btn-primary", :value => "Neste runde"}
+
           - if (game_state.is_running?)
             %input#pause{:type => "button", :class=>"btn btn-danger", :value => "Pause"}
           - else

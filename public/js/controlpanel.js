@@ -7,6 +7,13 @@ $(document).ready(function() {
 		window.location.reload()
 	});
 
+	$('#reduce').click(function(){
+		$.post('/reduce_round', function(data) {
+			location.reload();
+		});
+		window.location.reload()
+	});
+
 	$('#pause').click(function(){
  		$.post('/pause', function(data) {
 		  location.reload();

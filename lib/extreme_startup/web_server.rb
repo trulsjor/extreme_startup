@@ -15,10 +15,10 @@ module ExtremeStartup
     
   class WebServer < Sinatra::Base
 
-    set :root, '/Users/trulsjor/dev/milescamp/extreme_startup/'
+    set :root, '/usr/src/app/'
     set :port, 3000
     set :static, true 
-    set :public_folder, 'public'
+
     set :players,    Hash.new
     set :players_threads, Hash.new
     set :scoreboard, Scoreboard.new(ENV['LENIENT'])
@@ -138,9 +138,15 @@ module ExtremeStartup
     end
     
     post '/advance_round' do
+    puts "Advance!!"
       question_factory.advance_round.to_s
     end
- 
+
+    post '/reduce_round' do
+    puts "Reduce!!"
+       question_factory.reduce_round.to_s
+     end
+
     post '/pause' do
       game_state.pause
     end
