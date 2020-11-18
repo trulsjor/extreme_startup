@@ -298,26 +298,12 @@ module ExtremeStartup
   end
 
   class GeneralKnowledgeQuestion < Question
-    class << self
-      def question_bank
-        [
-          ["Ikke Miles2.0, men..?", "Miles Ahead"],
-          ["Hvor mange ansatte (inkludert signerte) er det totalt i Miles pr i dag", "86"],
-          ["Hva er slagordet til Miles?", "Faglig autoritet og varme - et unikt IT-selskap"],
-          ["Hvem har æren for logoen til Miles?", "Ivan"],
-          ["Hva heter hotellet vi er på?", "Holmenkollen Park Hotel Rica"],
-          ["I hvilket år ble Miles startet?","2005"],
-          ["I hvilken by ble det første Mileskontoret åpnet?", "Bergen"],
-          ["Hva er organisasjonsnummeret til Miles Stavanger AS?", "896892592"],
-          ["Hva er epostadressen til Miles Oslo?","oslo@miles.no"]
-        ]
-      end
-    end
+    @@quiz_cards = YAML.load_file(File.join(File.dirname(__FILE__), "general-knowledge.yaml"))
 
     def initialize(player)
-      question = GeneralKnowledgeQuestion.question_bank.sample
-      @question = question[0]
-      @correct_answer = question[1]
+      quiz_card = @@quiz_cards.sample
+      @question = quiz_card["question"]
+      @correct_answer = quiz_card["answer"]
     end
 
     def as_text
