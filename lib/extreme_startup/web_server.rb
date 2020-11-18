@@ -138,12 +138,10 @@ module ExtremeStartup
     end
     
     post '/advance_round' do
-    puts "Advance!!"
       question_factory.advance_round.to_s
     end
 
     post '/reduce_round' do
-    puts "Reduce!!"
        question_factory.reduce_round.to_s
      end
 
