@@ -283,7 +283,7 @@ module ExtremeStartup
   class FibonacciQuestion < BinaryMathsQuestion
     def as_text
       n = @n1 + 4
-      return "Hvilket tall er nummer #{n} i Fibonaccirekken"  
+      return "Hvilket tall er nummer #{n} i Fibonaccirekken"
     end
     def points
       50
@@ -459,8 +459,8 @@ class PalindromeQuestion < Question
         AdditionQuestion,                     #01  1
         MaximumQuestion,                      #02  1
         MultiplicationQuestion,               #03  2
-        PrimesQuestion,                       #04  2 
-        SquareCubeQuestion,                   #05  2 
+        PrimesQuestion,                       #04  2
+        SquareCubeQuestion,                   #05  2
         PalindromeQuestion,                   #06  3
         SubtractionQuestion,                  #07  3
         FibonacciQuestion,                    #08  3
@@ -482,7 +482,7 @@ class PalindromeQuestion < Question
       # 4 -  - 11
       # 5 -  - 14
 
-      window_start = 0 
+      window_start = 0
       #window_end = 14
       available_question_types = @question_types[window_start..window_end]
       available_question_types.sample.new(player)

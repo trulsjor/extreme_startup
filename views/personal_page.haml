@@ -10,22 +10,22 @@
           %button{:type=>"button", :class => "btn btn-navbar", :data => "collapse", :data => ".nav-collapse"}
             %span{:class=>"icon-bar"}
             %span{:class=>"icon-bar"}
-            %span{:class=>"icon-bar"}       
+            %span{:class=>"icon-bar"}
           %div{:class=>"nav-collapse collapse"}
             %ul{:class=>"nav"}
               %li
-                %a{ :href=>"/graph"}Oversikt  
+                %a{ :href=>"/graph"}Oversikt
               %li
                 %a{ :href=>"/nograph"}Uten graf og bling
-            %ul{:class=>"nav pull-right"}  
+            %ul{:class=>"nav pull-right"}
               %li
                 %a{:href=>"/samples.zip"}
                   %i{:class=>"icon-download-alt icon-white"}
                   Startkit
-                  
+
     .container-narrow
       .jumbotron
-        %h1 #{name} 
+        %h1 #{name}
         %h2 har  #{score} poeng
         %table{:class => "table table-striped"}
           - log.each do |logline|
@@ -34,7 +34,7 @@
               %td #{logline.text}
               %td #{logline.result}
               %td #{logline.points} poeng!
-     
+
       .jumbotron
         %a{ :href => "/withdraw/#{playerid}", :class =>"btn btn-large btn-danger"}
           Jeg trekker meg :(
